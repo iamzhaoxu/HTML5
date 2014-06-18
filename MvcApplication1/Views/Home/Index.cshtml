@@ -1,0 +1,68 @@
+﻿<canvas id ="diagonal" width="1000" height="1000"></canvas>
+<script>
+    var bark = new Image();
+    bark.src = "../../Images/tux.png";
+    $(bark).load(
+        function () {
+            draw();
+        });
+
+    function draw() {
+        var canvas = $('#diagonal')[0];
+        var context = canvas.getContext('2d');
+        // Save a copy of the current drawing state
+        context.save();
+        // Move the drawing context to the right, and down
+
+        // Draw the same line as before, but using the origin as a start
+        context.beginPath();
+        context.translate(130, 250);
+        context.moveTo(-25, -50);
+        context.lineTo(-10, -80);
+        context.lineTo(-20, -80);
+        context.lineTo(-5, -110);
+        context.lineTo(-15, -110);
+        // Top of the tree
+        context.lineTo(0, -140);
+        context.lineTo(15, -110);
+        context.lineTo(5, -110);
+        context.lineTo(20, -80);
+        context.lineTo(10, -80);
+        context.lineTo(25, -50);
+        // Close the path back to its start point
+        context.closePath();
+        // Increase the line width
+        context.lineWidth = 4;
+        // Round the corners at path joints
+        context.lineJoin = 'round';
+        // Change the color to brown
+        context.strokeStyle = '#663300';
+        context.lineCap = 'round';
+        context.fillStyle = '#339900';
+        context.fill();
+        // Change fill color to brown
+        context.fillStyle = '#663300';
+        // Fill a rectangle for the tree trunk
+        //context.fillRect(-5, -50, 10, 50);
+        //context.clearRect(-2.5, -30, 5, 20);
+        context.drawImage(bark, -5, -50, 10, 50);
+        context.stroke();
+
+        context.restore();
+
+        context.save();
+        context.translate(-10, 350);
+        context.beginPath();
+        // The first curve bends up and right
+        context.moveTo(0, 0);
+        context.quadraticCurveTo(170, -50, 260, -190);
+        // The second curve continues down and right
+        context.quadraticCurveTo(310, -250, 410, -250);
+        // Draw the path in a wide brown stroke
+        context.strokeStyle = '#663300';
+        context.lineWidth = 20;
+        context.stroke();
+        // Restore the previous canvas state
+        context.restore();
+    }
+</script>
